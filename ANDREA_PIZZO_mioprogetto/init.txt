@@ -1,0 +1,42 @@
+CREATE TABLE clienti (
+    Email VARCHAR(100) PRIMARY KEY,
+    Tipo VARCHAR(50),
+    Nome VARCHAR(100),
+    Indirizzo VARCHAR(255),
+    Username VARCHAR(50) UNIQUE,
+    Password VARCHAR(50)
+);
+
+-- Tabella "consegna"
+CREATE TABLE consegna (
+    ID_Consegna INT PRIMARY KEY AUTO_INCREMENT,
+    DataConsegna DATE,
+    OrarioConsegna TIME
+);
+
+-- Tabella "prodotti"
+CREATE TABLE prodotti (
+    Codice INT PRIMARY KEY,
+    Categoria VARCHAR(50),
+    Tipo VARCHAR(50),
+    Descrizione TEXT,
+    Prezzo DECIMAL(10, 2),
+    Quantita INT
+);
+
+CREATE TABLE fattorini (
+    ID_Fattorino INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(100),
+    Username VARCHAR(50) UNIQUE,
+    Password VARCHAR(50)
+);
+
+CREATE TABLE ordine (
+    ID_Ordine INT PRIMARY KEY AUTO_INCREMENT,
+    EmailCliente VARCHAR(100),
+    CodiceProdotto INT,
+    Quantita INT,
+    CostoTotale DECIMAL(10, 2),
+    FOREIGN KEY (EmailCliente) REFERENCES clienti(Email),
+    FOREIGN KEY (CodiceProdotto) REFERENCES prodotti(Codice)
+);
